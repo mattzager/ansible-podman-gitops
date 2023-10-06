@@ -1,12 +1,13 @@
 # ansible-podman-gitops
-For use with RHDP: Ansible Workshop - Ansible for Red Hat Enterprise Linux
-The basic demo walkthrough uses a basic gitops approach with Ansible to deploy, test and promote a simple web application. Changes made to the repository in a new branch will trigger a deployment to development hosts. Branch merges to the main trunk will trigger a deployment to production hosts. Deployments happen on the host using an Ansible playbook that clones the git repository to the host, creates a new podman image and then starts a podman container running the application. 
+The basic demo walkthrough uses a basic gitops approach with Ansible to deploy, test and promote a simple web application in a podman container. Changes made to the repository in a new branch will trigger a deployment to development hosts. Branch merges to the main trunk will trigger a deployment to production hosts. Deployments happen on the host using an Ansible playbook that clones the git repository to the host, creates a new podman image and then starts a podman container running the application. 
 
 Prerequisites
-1. Github
+1. RHDP
+    2. Ansible Workshop - Ansible for Red Hat Enterprise Linux  
+2. Github
     1. Import Repository
         1. https://github.com/mattzager/ansible-podman-gitops.git
-2. AAP
+3. AAP
     1. Projects
         1. Create AAP project from this repository
             1. ansible-podman-gitops
@@ -54,7 +55,7 @@ Prerequisites
                             1. Pull requests
                             2. Pushes
                     6. Add webhook
-3. VSCode
+4. VSCode
     1. Terminal Proxy Tunnels (needed to use local browser to access apps in sandbox env)
         1. New Terminal
             1. ssh -L 8881:localhost:8881 -N node1 &
