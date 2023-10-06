@@ -1,0 +1,15 @@
+- name: Ansible install
+  ansible.builtin.package:
+    name: ansible
+    state: present
+  become: true
+        
+- name: push -- Clone application repository 
+  ansible.builtin.git:
+    repo: "{{ awx_webhook_payload.repository.clone_url }}"
+    dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
+    clone: true
+    update: true
+
+- name: run container
+  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml -e \"container_name=colorsprod host_port=8880 repo_author={{ awx_webhook_payload.pusher.name }} repo_name={{ awx_webhook_payload.repository.name }} repo_ref=main\""

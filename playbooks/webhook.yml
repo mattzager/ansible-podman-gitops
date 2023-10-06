@@ -1,0 +1,41 @@
+---
+- name: Capture POSTs from git
+  hosts: appnodes
+  gather_facts: false
+  tasks:
+
+  - name: set type
+    set_fact:
+      etype: "{{ awx_webhook_event_type }}"
+      
+  - name: set ref
+    set_fact:
+      eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
+    when: etype == "push"
+
+  - name: set action
+    set_fact:
+      eaction: "{{ awx_webhook_payload.action }}"
+    when: etype == "pull_request"
+
+# Run action in response to push events
+- name: Respond to push event
+  hosts: prodnodes
+  gather_facts: false
+  tasks:
+  - name: on_push
+    include_tasks: on_push.yml
+    when:
+      - etype == "push"
+      - eref == "main"
+      
+# Run action in response to push events
+- name: Respond to pull request event
+  hosts: devnodes
+  gather_facts: false
+  tasks:
+  - name: on_pull
+    include_tasks: on_pr.yml
+    when:
+      - etype == "pull_request"
+      - eaction == "opened"

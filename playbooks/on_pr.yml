@@ -1,0 +1,16 @@
+- name: Ansible install
+  ansible.builtin.package:
+    name: ansible
+    state: present
+  become: true
+  
+- name: pull_request -- Update application repository to event ref 
+  ansible.builtin.git:
+    repo: "{{ awx_webhook_payload.repository.clone_url }}"
+    dest: "/tmp/{{ awx_webhook_payload.pull_request.head.ref }}"
+    clone: true
+    update: true
+    version: "{{ awx_webhook_payload.pull_request.head.ref }}"
+
+- name: run container
+  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.pull_request.head.ref }}/deploy.yml -e \"container_name=colorsdev host_port=8881 repo_author={{ awx_webhook_payload.pull_request.user.login }} repo_name={{ awx_webhook_payload.pull_request.head.ref }} repo_ref={{ awx_webhook_payload.pull_request.head.ref }}\""

@@ -1,0 +1,48 @@
+---
+- name: Deploy appication
+  hosts: localhost
+  gather_facts: false
+  become: true
+  vars:
+    color:  "red"
+    container_port: 8080
+    #host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    #container_name: "{{ 'colors-dev' if event.etype == 'pull_request' else 'colors' }}"
+    #repo_author:    "{{ event.eauthor }}"
+    #repo_ref:       "{{ event.eref }}"
+    #repo_name: repo name
+    
+  tasks:
+    - name: Podman install
+      ansible.builtin.package:
+        name: podman
+        state: present
+
+    - name: Build a podman image
+      containers.podman.podman_image:
+        name: suncavanaugh
+        path: "/tmp/{{ repo_name }}/app"
+        force: true
+        build:
+          format: docker
+          force_rm: yes
+  
+    - name: Create a color container
+      containers.podman.podman_container:
+        name: "{{ container_name }}"
+        image: localhost/suncavanaugh
+        state: started
+        recreate: true
+        network: bridge
+        ports:
+            - "{{ host_port }}:{{ container_port }}"
+        env:
+            APP_COLOR: "{{ color }}"
+            PUSHER: "{{ repo_author }}"
+            GITREF: "{{ repo_ref }}"
+            HOSTPORT: "{{ host_port }}"
+      register: container
+
+    - name: Print container
+      debug:
+        var: container

@@ -1,0 +1,15 @@
+---
+- name: prep_hosts
+  hosts: appnodes
+  gather_facts: false
+  become: true
+  tasks:
+  - name: Ansible install
+    ansible.builtin.package:
+      name: ansible
+      state: present
+
+  - name: Podman install
+    ansible.builtin.package:
+      name: podman
+      state: present
