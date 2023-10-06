@@ -87,13 +87,14 @@ The demo walkthrough uses a basic gitops approach with Ansible to deploy, test a
             2. Commit changes…
                 1. Create a new branch for this commit and start a pull request
                 2. Propose changes
+                3. Create pull request
     2. AAP
         1. Jobs
             1. [#]-webhook
                 1. Observe task trigger
                 2. Observe on_pr tasks
-    3. VSCode
-        1. Copy browser URL
+    3. Browser
+        1. Copy URL from VSCode tab
         2. Open new tab, paste URL, add proxy/8881
         3. View application is your color
 2. Promote to Prod
@@ -105,8 +106,8 @@ The demo walkthrough uses a basic gitops approach with Ansible to deploy, test a
             1. [#]-webhook
                 1. Observe task trigger
                 2. Observe on_push tasks
-    3. VSCode
-        1. Copy app browser URL
+    3. Browser
+        1. Copy URL from dev application tab
         2. Open new tab, paste URL, change 8881 to 8880
         3. View application is your color
 3. Deploy new Dev
@@ -122,6 +123,6 @@ The demo walkthrough uses a basic gitops approach with Ansible to deploy, test a
             1. [#]-webhook
                 1. Observe task trigger
                 2. Observe on_pr tasks
-    3. VSCode
-        1. Browser /editor/proxy/8881 - view application is your new color
-        2. Browser /editor/proxy/8880 - view production application has not changed
+    3. Browser
+        1. Refresh /8881 tab - view application is your new color
+        2. Refresh /8880 tab - view production application has not changed
