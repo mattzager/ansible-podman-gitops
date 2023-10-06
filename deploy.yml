@@ -4,7 +4,7 @@
   gather_facts: false
   become: true
   vars:
-    color:  "red"
+    color:  "blue"
     container_port: 8080
     #host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
     #container_name: "{{ 'colors-dev' if event.etype == 'pull_request' else 'colors' }}"
