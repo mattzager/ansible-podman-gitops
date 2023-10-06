@@ -1,9 +1,9 @@
 # ansible-podman-gitops
 The basic demo walkthrough uses a basic gitops approach with Ansible to deploy, test and promote a simple web application (based on app and scenario from Instruqt Lab https://play.instruqt.com/embed/redhat/tracks/eda-gitops). Changes made to the repository in a new branch will trigger a deployment to development hosts. Branch merges to the main trunk will trigger a deployment to production hosts. Deployments happen on the host using an Ansible playbook that clones the git repository to the host, creates a new podman image and then starts a podman container running the application. 
 
-Prerequisites
+## Prerequisites
 1. RHDP
-    2. Ansible Workshop - Ansible for Red Hat Enterprise Linux  
+    1. Ansible Workshop - Ansible for Red Hat Enterprise Linux  
 2. Github
     1. Import Repository
         1. https://github.com/mattzager/ansible-podman-gitops.git
@@ -62,7 +62,7 @@ Prerequisites
         2. New Terminal
             1. ssh -L 8880:localhost:8880 -N node3 &
 
-System Walkthrough
+## System Walkthrough
 1. RHDP Overview
     1. This is IaC - environment deployed by Ansible on AWS
         1. Developer Host
@@ -79,7 +79,7 @@ System Walkthrough
     3. deploy.yml
         1. Ansible playbook run on hosts to deploy app in podman container
 
-Demo Walkthrough
+## Demo Walkthrough
 1. Deploy Dev
     1. Github
         1. Edit deploy.yml
