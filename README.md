@@ -1,5 +1,5 @@
 # ansible-podman-gitops
-The basic demo walkthrough uses a basic gitops approach with Ansible to deploy, test and promote a simple web application (based on app and scenario from Instruqt Lab https://play.instruqt.com/embed/redhat/tracks/eda-gitops). Changes made to the repository in a new branch will trigger a deployment to development hosts. Branch merges to the main trunk will trigger a deployment to production hosts. Deployments happen on the host using an Ansible playbook that clones the git repository to the host, creates a new podman image and then starts a podman container running the application. 
+The demo walkthrough uses a basic gitops approach with Ansible to deploy, test and promote a simple web application (based on app and scenario from Instruqt Lab https://play.instruqt.com/embed/redhat/tracks/eda-gitops). Changes made to the repository in a new branch will trigger a deployment to development hosts. Branch merges to the main trunk will trigger a deployment to production hosts. Deployments happen on the host using an Ansible playbook that clones the git repository to the host, creates a new podman image and then starts a podman container running the application. 
 
 ## Prerequisites
 1. RHDP
